@@ -18,8 +18,9 @@
 
 > ※このリンクは **あなたが GitHub に push した後** に有効になる。
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/Mokafe/ulysses-narrative-gmm/blob/main/notebooks/00_ulysses_gmm_report.ipynb
+https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/notebooks/00_ulysses_gmm_report.ipynb
 )
+
 
 ---
 
