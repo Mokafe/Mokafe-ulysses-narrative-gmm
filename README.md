@@ -9,7 +9,11 @@
 - **遷移点列の本文還元**：境界点前後のイベント列を抽出して読解へ戻す
 
 > 重要：著作権の扱いは各自の利用条件に従うこと。公開リポジトリでは「短い引用」または「要約」中心を推奨する。
-
+> 
+### Paper (PDF)
+Paper（報告書PDF）：LLM支援アノテーションによる『ユリシーズ』意識モードの定量化と転調点分析
+——evidence-anchored prompting と半教師ありGMMによる探索的検証
+- [Paper (PDF): docs/paper/ulysses_imrad_report.pdf](docs/paper/ulysses_imrad_report.pdf)
 ---
 
 ## Quickstart (Colab)
