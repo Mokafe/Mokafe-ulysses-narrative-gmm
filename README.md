@@ -12,17 +12,18 @@
 
 ---
 
-## Quickstart（Colab）
+## Quickstart (Colab)
 
-下のバッジをクリックして開き、上から実行する。
+以下のバッジをクリックして、ノートブックを実行できます。用途に合わせて選択してください。
 
-> ※このリンクは **あなたが GitHub に push した後** に有効になる。
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
-https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/notebooks/00_ulysses_gmm_report.ipynb
-)
+| Version | Link | Note |
+| :--- | :--- | :--- |
+| **Main Report** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/notebooks/00_ulysses_gmm_report.ipynb) | 推奨：`notebooks/` フォルダ内の構成済みレポート |
+| **Snapshot (v1.02)** | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/00_ulysses_gmm_report_v1_02.ipynb) | 記録用：ルートディレクトリにある v1.02 版 |
 
-
----
+> **Note:** リンクが有効になるには、GitHubリポジトリ内に以下のファイルが存在している必要があります：
+> 1. `notebooks/00_ulysses_gmm_report.ipynb`
+> 2. `00_ulysses_gmm_report_v1_02.ipynb`
 
 ## Quickstart（Local）
 
