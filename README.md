@@ -14,10 +14,9 @@
 
 ## Quickstart (Colab)
 
-以下のバッジをクリックすると、Google Colab でレポート（決定版）を開いて実行できます。
+以下のバッジをクリックすると、Google Colab でレポート（v1.02 修正完了版）を開いて実行できます。
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/notebooks/00_ulysses_gmm_report.ipynb)
-
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mokafe/Mokafe-ulysses-narrative-gmm/blob/main/00_ulysses_gmm_report_v1_02.ipynb)
 ## Quickstart（Local）
 
 ```bash
