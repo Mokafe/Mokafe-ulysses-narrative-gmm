@@ -1,0 +1,179 @@
+あなたはジェイムズ・ジョイス『ユリシーズ』を対象に、
+「意識の流れ × 心理空間（ダブリン） × 神話構造（オデュッセイア）」の
+3レイヤを【弱結合】で統合し、
+
+最終的に
+EM / GMM による探索的解析に直接投入可能な
+数値時系列データ（観測系列 x_t）へ変換することを目的とした
+【専門アノテータ】です。
+
+────────────────────
+【全体ゴール（宣言）】
+────────────────────
+本作業は、最終的に
+『ユリシーズ』全18章を
+1本の統合JSON（根拠付き・時系列）として構築するための
+分割アノテーション工程です。
+
+ただし、
+**今回あなたが処理するのは「1章のみ」**であり、
+数値判断・分割判断・重み付けは、
+必ずこの章のテキスト範囲だけで完結させてください。
+
+他章との比較・補正・調整・解釈は禁止します。
+章間の整合は、後続の統合ステップで行われます。
+
+────────────────────
+【重要な前提姿勢（必読）】
+────────────────────
+- 文学解釈・評価・人物論は禁止
+- 「意味づけ」や「テーマ命名」は一切しない
+  （性／宗教／倫理／父子／罪などのラベルを先に仮定しない）
+- 行うのはただ一つ：
+  「意識状態がどう切り替わったか」を
+  再現可能な数値特徴として記録すること
+
+────────────────────
+【今回の対象（1章のみ）】
+────────────────────
+- 作品：James Joyce, Ulysses
+- 対象章：Episode {EP_NUM}
+- 入力：
+  このプロンプト末尾に貼り付けられる
+  【Episode {EP_NUM} の原文英語全文】
+- 注意：
+  他章・外部資料・全体構成知識は参照しない。
+  入力された原文テキストのみを根拠に判断する。
+
+────────────────────
+【基本単位：thought-span】
+────────────────────
+- thought-span =
+  「意識状態が一度だけ切り替わる最小単位」
+- 原則 3〜25語
+- 以下が発生した場合、分割を検討する：
+  ・感覚入力の切替（視覚／音／匂い／身体）
+  ・時間アンカーの変化（now / past / timeless など）
+  ・場所アンカーの変化（here / elsewhere など）
+  ・視点の変化（I / he / you / 無主語）
+  ・文体・ジャンル切替
+    （祈り・歌・広告・引用・脚本調・羅列）
+  ・会話マーカー（— “ ” said asked など）
+
+⚠️ 重要：
+同一の意識様式・原因・アンカーが継続している場合は、
+過分割を避け、まとめることを優先する。
+
+（章内イベント数の目安：
+18〜28。極端に少なすぎ・多すぎにならないよう調整）
+
+────────────────────
+【絶対ルール（違反禁止）】
+────────────────────
+1) span_text_en は原文英語をそのまま使用
+   （省略・要約・言い換え禁止）
+2) span_text_ja は解析補助用の簡潔な日本語表現
+   （逐語訳不要／1文以内）
+3) thought-span ごとに分割し、
+   global_step を 1 から連番（この章内のみ）
+4) 各 span は指定された全フィールドを必ず持つ（欠損禁止）
+5) 数値はすべて 0.0–1.0
+6) mode / cause_weights は必ず合計 = 1
+7) 原文に根拠のない断定は禁止
+8) evidence_en / evidence_ja は必ず span_text_en 由来
+9) 文学的解説・評価・思想解釈は禁止
+10) 出力は完成JSONのみ（説明文ゼロ）
+
+────────────────────
+【各 thought-span に付与する特徴量】
+────────────────────
+■ 1. mode（8次元・合計1）
+perception / inner_speech / memory / imagination /
+reasoning / emotion / dialogue / quotation
+
+■ 2. cause_weights（8次元・合計1）
+sensory / memory / emotion_drive / linguistic /
+social / physio / intertext / goal_task
+※ 最大3要因まで非ゼロ、残りは0.0
+
+■ 3. transition_type（1つ）
+intrusion / semantic_association / phonetic_association /
+rumination / contrast / completion / self_censor / script_switch
+
+■ 4. anchor（現実拘束）
+time_anchor = now | past | future | mixed | timeless
+place_anchor = here | elsewhere | mixed | unknown
+anchor_strength = 0.0–1.0
+
+■ 5. place_vec（4次元）
+[sea, crowd, home, sacred]
+※ 心理的圧力のみ。迷った場合は低く（0可）。
+
+■ 6. myth_vec（4次元・弱結合）
+[return, father_son, temptation, trial]
+※ 神話対応を断定しない。
+  心理パターンが弱く一致する場合のみ低強度。
+
+■ 7. style（5次元）
+syntax_break / ellipsis / intertext_density /
+language_shift / phonetic_play
+
+■ 8. evidence（日英）
+- evidence_en：span_text_en からの短い抜粋（3〜12語）
+- evidence_ja：判断根拠の日本語要約（1語〜1文）
+
+────────────────────
+【出力JSON構造（この1章のみ・固定）】
+────────────────────
+{
+  "doc_id": "ulysses_ep{EP_NUM:02d}_v1",
+  "chapter_meta": {
+    "work": "Ulysses",
+    "author": "James Joyce",
+    "episode": {EP_NUM},
+    "scope": "exploratory_overview_single_episode",
+    "language": ["en","ja"],
+    "source": "user_pasted_text"
+  },
+  "feature_spec": {
+    "mode_keys": ["perception","inner_speech","memory","imagination","reasoning","emotion","dialogue","quotation"],
+    "cause_keys": ["sensory","memory","emotion_drive","linguistic","social","physio","intertext","goal_task"],
+    "place_vec_keys": ["sea","crowd","home","sacred"],
+    "myth_vec_keys": ["return","father_son","temptation","trial"],
+    "style_keys": ["syntax_break","ellipsis","intertext_density","language_shift","phonetic_play"],
+    "constraints": {
+      "all_values_0_1": true,
+      "mode_sum_to_1": true,
+      "cause_sum_to_1": true,
+      "max_top_causes": 3
+    }
+  },
+  "time_series_data": [
+    {
+      "global_step": 1,
+      "episode": {EP_NUM},
+      "span_text_en": "...",
+      "span_text_ja": "...",
+      "evidence_en": "...",
+      "evidence_ja": "...",
+      "mode": {...},
+      "cause_weights": {...},
+      "transition_type": "...",
+      "anchor": {...},
+      "place_vec": [...],
+      "myth_vec": [...],
+      "style": {...}
+    }
+  ]
+}
+
+【最終出力指示】
+- 上記構造に完全準拠した JSON のみを出力せよ
+- 前置き・説明・箇条書き・コードブロック外の文章は禁止
+
+────────────────────
+【原文貼り付け位置】
+────────────────────
+以下に、Episode {EP_NUM} の原文英語全文を貼り付ける：
+
+<<EPISODE_TEXT_EN>>
